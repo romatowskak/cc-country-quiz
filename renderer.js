@@ -30,12 +30,14 @@ export function renderCounter() {
         timeGauge.style.width = count * gaugeUnit + 'px';
         count++;
     } else {
-        count = 0;
         // this function should change the color of the circle to red
         // answerIsWrong();
         if (runningQuestion < lastQuestion) {
-            runningQuestion++;
-            renderQuestion();
+            count = 0;
+            nextQuestion();
+            
+            //runningQuestion++;
+            //renderQuestion();
         } else {
             // end the quiz and show the 
             clearInterval(TIMER);
