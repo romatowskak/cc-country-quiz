@@ -12,7 +12,7 @@ const choiceC = document.getElementById('C');
 
 // some variables
 
-let lastQuestion = questions.length - 1;
+let lastQuestion = questions.length;
 let runningQuestion = 0;
 let count = 0;
 let questionTime = 10; // 10s
@@ -53,6 +53,7 @@ function checkAnswer(answer) {
     if (answer == questions[runningQuestion].correct) {
         // answer is correct
         score++;
+        
         // change progress color to green
         // // Mariusz
         // answerIsCorrect();
@@ -62,9 +63,15 @@ function checkAnswer(answer) {
         // Mariusz
         // answerIsWrong();
     }
-    count = 0;
+    nextQuestion();
+}
+
+window.nextQuestion = nextQuestion;
+
+function nextQuestion() {
     if (runningQuestion < lastQuestion) {
         runningQuestion++;
+        console.log("Running question: " + runningQuestion + "/" + lastQuestion);
         renderQuestion();
     } else {
         // end the quiz and show the score
