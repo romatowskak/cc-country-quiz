@@ -61,15 +61,15 @@ body {
     font-size: 1.25em;
 }
 
-#choices {
+#choices, #nextBtn {
     width: 480px;
     position: absolute;
     right: 0;
-    top: 125px;
+    top: 80px;
     padding: 10px
 }
 
-.choice {
+.choice, .nextBtn {
     display: inline-block;
     width: 135px;
     text-align: center;
@@ -79,10 +79,22 @@ body {
     padding: 5px;
 }
 
-.choice:hover {
+.choice:hover, .nextBtn:hover {
     border: 2px solid grey;
     font-weight: bold;
 }
+
+#nextBtn {
+    top: 130px;
+}
+
+.nextBtn {
+    position: relative;
+    left: 160px;
+    background-color: rgb(217, 240, 210);
+}
+
+
 
 #timer {
     position: absolute;

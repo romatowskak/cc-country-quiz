@@ -9,10 +9,11 @@ const qImg = document.getElementById('qImg');
 const choiceA = document.getElementById('A');
 const choiceB = document.getElementById('B');
 const choiceC = document.getElementById('C');
+const scoreImg = document.getElementById('scoreContainer');
 
 // some variables
 
-let lastQuestion = questions.length - 1;
+let lastQuestion = questions.length;
 let runningQuestion = 0;
 let count = 0;
 let questionTime = 10; // 10s
@@ -53,30 +54,76 @@ function checkAnswer(answer) {
     if (answer == questions[runningQuestion].correct) {
         // answer is correct
         score++;
+        console.log("Correct answer");
         // change progress color to green
         // // Mariusz
-        // answerIsCorrect();
+        answerIsCorrect();
     } else {
         // answer is wrong
         // change progress color to red
         // Mariusz
-        // answerIsWrong();
+        answerIsWrong();
+        console.log("Wrong answer");
     }
-    count = 0;
+    nextQuestion();
+}
+
+window.nextQuestion = nextQuestion;
+
+export function nextQuestion() {
     if (runningQuestion < lastQuestion) {
         runningQuestion++;
+        console.log("Running question: " + runningQuestion + "/" + lastQuestion);
         renderQuestion();
     } else {
         // end the quiz and show the score
         clearInterval(TIMER);
         // Mariusz
-        // scoreRender();
+        scoreRender();
     }
 }
 
 // when answer's correct
-// export function answerIsCorrect() {}
+function answerIsCorrect() {
+    let index = runningQuestion.toString();
+    let progCircle = document.getElementById(index);
+    progCircle.style.backgroundColor = 'green';
+}
 
 
 // // when answer's wrong
-// export function answerIsWrong() {}
+function answerIsWrong() {
+    let index = runningQuestion.toString();
+    let progCircle = document.getElementById(index);
+    progCircle.style.backgroundColor = 'red';
+}
+
+function scoreRender() {
+    quiz.style.display = 'none';
+    scoreImg.style.display = 'block';
+    let percentage_res = Math.round(score / lastQuestion * 100)
+    
+    // Diplay result %
+    console.log(percentage_res + " %")
+
+    if (percentage_res < 20) {
+        scoreImg.innerHTML = "<img src=\"img/1.png\">";
+    } else if (percentage_res < 40) {
+        scoreImg.innerHTML = "<img src=\"img/2.png\">";
+    } else if (percentage_res < 60) {
+        scoreImg.innerHTML = "<img src=\"img/3.png\">";
+    } else if (percentage_res < 80) {
+        scoreImg.innerHTML = "<img src=\"img/4.png\">";
+    } else {
+        scoreImg.innerHTML = "<img src=\"img/5.png\">";
+    };
+    
+    let button_node = document.createElement("button");
+    let button_text = document.createTextNode("AGAIN");
+    button_node.appendChild(button_text);
+    scoreImg.appendChild(button_node);
+
+    button_node.addEventListener("click", function() {
+        location.reload()
+    });
+}
