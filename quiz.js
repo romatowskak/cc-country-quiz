@@ -1,5 +1,6 @@
 import { questions } from './questions.js';
 import { renderCounter, renderProgress } from './renderer.js';
+import { countryInfo }  from './countries.js';
 
 //  retrieving elements from the template (index.html)
 const start = document.getElementById('start');
@@ -55,6 +56,8 @@ function checkAnswer(answer) {
         // answer is correct
         score++;
         console.log("Correct answer");
+        
+
         // change progress color to green
         // // Mariusz
         answerIsCorrect();
@@ -85,6 +88,7 @@ export function nextQuestion() {
 
 // when answer's correct
 function answerIsCorrect() {
+     countryInfo("United Kingdom");
     let index = runningQuestion.toString();
     let progCircle = document.getElementById(index);
     progCircle.style.backgroundColor = 'green';
