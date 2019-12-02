@@ -10,7 +10,10 @@ const qImg = document.getElementById('qImg');
 const choiceA = document.getElementById('A');
 const choiceB = document.getElementById('B');
 const choiceC = document.getElementById('C');
-const scoreImg = document.getElementById('scoreContainer');
+const scoreCon = document.getElementById('scoreContainer');
+const scoreImg = document.getElementById('scoreImg');
+const scoreBtn = document.getElementById('scoreBtn');
+const scorePercent = document.getElementById('scorePercent');
 
 // some variables
 
@@ -96,7 +99,7 @@ function answerIsWrong() {
 
 function scoreRender() {
     quiz.style.display = 'none';
-    scoreImg.style.display = 'block';
+    scoreCon.style.display = 'flex';
     let percentage_res = Math.round(score / lastQuestion * 100)
     
     // Diplay result %
@@ -114,12 +117,17 @@ function scoreRender() {
         scoreImg.innerHTML = "<img src=\"img/5.png\">";
     };
     
-    let button_node = document.createElement("button");
+    let button_node = document.createElement("p");
     let button_text = document.createTextNode("AGAIN");
     button_node.appendChild(button_text);
-    scoreImg.appendChild(button_node);
+    scoreBtn.appendChild(button_node);
 
-    button_node.addEventListener("click", function() {
+    scoreBtn.addEventListener("click", function() {
         location.reload()
     });
+
+    let score_node = document.createElement("p");
+    let p_text = document.createTextNode(percentage_res + "%");
+    score_node.appendChild(p_text);
+    scorePercent.appendChild(score_node);
 }
