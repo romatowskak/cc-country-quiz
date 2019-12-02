@@ -53,18 +53,10 @@ window.checkAnswer = checkAnswer;
 
 function checkAnswer(answer) {
     if (answer == questions[runningQuestion].correct) {
-        // answer is correct
         score++;
         console.log("Correct answer");
-        
-
-        // change progress color to green
-        // // Mariusz
         answerIsCorrect();
     } else {
-        // answer is wrong
-        // change progress color to red
-        // Mariusz
         answerIsWrong();
         console.log("Wrong answer");
     }
