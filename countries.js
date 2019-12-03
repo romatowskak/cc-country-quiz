@@ -1,23 +1,27 @@
 
-window.onload =fetchCountryData();
-async function fetchCountryData(){
-    fetch("https://restcountries.eu/rest/v2/all",{
+
+window.onload = fetchCountryData();
+
+export async function fetchCountryData(name){
+
+   await fetch(`https://restcountries.eu/rest/v2/name/${name}`,{
         method: 'GET'
     }).then(response => response.json())
     .then(response => {
         response.forEach(country => {
-            console.log(`Name:   ${country.name}`);
-            console.log(`Flag:   ${country.flag}`);
+            questions.push(country.flag);
         })
      })
     .catch(err => {
         console.log(err);
     });
+    console.log(flag);
 }
 
+export let flag =[];
 
 export async function countryInfo(name){
-    fetch(`https://restcountries.eu/rest/v2/name/${name}`,{
+ await fetch(`https://restcountries.eu/rest/v2/name/${name}`,{
         method: 'GET'
     }).then(response => response.json()).then(response => 
         response.forEach(country => {
@@ -31,4 +35,3 @@ export async function countryInfo(name){
         console.log(err);
     }));
 }
-

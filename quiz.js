@@ -1,6 +1,6 @@
 import { questions } from './questions.js';
 import { renderCounter, renderProgress } from './renderer.js';
-import { countryInfo }  from './countries.js';
+import { fetchCountryData ,countryInfo }  from './countries.js';
 
 //  retrieving elements from the template (index.html)
 const start = document.getElementById('start');
@@ -29,6 +29,7 @@ let score = 0;
 // here we are rendering all the questions defined in the questions.js file
 // running question is the index of the question object from question.js file
 // Karola
+
 export function renderQuestion() {
     let q = questions[runningQuestion];
     question.innerHTML = '<p>' + q.question + '</p>';
@@ -37,6 +38,7 @@ export function renderQuestion() {
     choiceB.innerHTML = q.choiceB;
     choiceC.innerHTML = q.choiceC;
 }
+
 
 start.addEventListener('click', startQuiz);
 
@@ -51,8 +53,13 @@ function startQuiz() {
     TIMER = setInterval(renderCounter, 1000); // 1000ms = 1s
 }
 
+  console.log(questions.correct);
+  let flag = fetchCountryData(questions.name);
+    
+
 // checkAnswer
 window.checkAnswer = checkAnswer;
+
 
 function checkAnswer(answer) {
     if (answer == questions[runningQuestion].correct) {
@@ -83,7 +90,7 @@ export function nextQuestion() {
 
 // when answer's correct
 function answerIsCorrect() {
-     countryInfo("United Kingdom");
+     countryInfo(questions.name);
     let index = runningQuestion.toString();
     let progCircle = document.getElementById(index);
     progCircle.style.backgroundColor = 'green';
